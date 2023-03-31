@@ -35,9 +35,8 @@ const _str2Token = (splitted: string[]) => {
       out.push(_str2Token(inner));
       continue;
     }
-    const el = splitted[i];
-    const parsed = el.match(/^[\d.]+$/) !== null ? parseFloat(el) : el;
-    out.push(parsed);
+    const asFloat = parseFloat(splitted[i]);
+    out.push(isNaN(asFloat) ? splitted[i] : asFloat);
   }
   return out;
 };

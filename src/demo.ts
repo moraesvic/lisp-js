@@ -26,6 +26,10 @@ const inputs: Input[] = [
     calc: ['(sqrt 2)'],
   },
   {
+    query: 'How much is -0.4729 times 17.423?',
+    calc: ['(* -0.4729 17.432)'],
+  },
+  {
     query: 'Give me a random number.',
     calc: ['(random)'],
   },
