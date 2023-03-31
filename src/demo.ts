@@ -79,6 +79,19 @@ const inputs: Input[] = [
       '(concat (floor (/ (- net taxes) 27)) " books")',
     ],
   },
+  {
+    query: 'Print the profit and tell me if we have a problem.',
+    calc: [
+      '(define sales 1200)',
+      '(define royalties 400)',
+      '(define expenses 1000)',
+      '(define taxes (* sales 0.15))',
+      '(define thresh 750)',
+      '(define profit (- (+ sales royalties) (+ expenses taxes)))',
+      '(print (concat "KPI is: " (usd profit)))',
+      '(print (concat "Alert should trigger? " (<= profit thresh)))',
+    ],
+  },
 ];
 
 const extendedEnv = {
