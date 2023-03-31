@@ -7,4 +7,7 @@ export const filterObj = (
 };
 
 export const removeFunctionsFromObject = (o: {}) =>
-  filterObj(o, (k, v) => typeof v !== "function");
+  filterObj(o, (k, v) => typeof v !== 'function');
+
+export const typesForValues = (o: {}) =>
+  Object.fromEntries(Object.entries(o).map(([k, v]) => [k, typeof v]));
