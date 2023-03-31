@@ -1,27 +1,32 @@
 import { core } from './core';
-import { AST, Env, lispEval } from './lisp';
-import { stringToToken, tokenToString } from './parenthesis';
-
-const VERBOSE = true;
+import { AST, Atom, Env, lisp } from './lisp';
+import { str2Token, token2Str } from './parenthesis';
 
 export type Input = {
   query: string;
   calc: AST[];
 };
 
-export const compute = ({ query, calc }: Input, extendedEnv: Env = {}) => {
-  console.log(query);
+export const compute = (
+  { query, calc }: Input,
+  extendedEnv: Env = {},
+  verbose = false
+) => {
+  if (verbose) {
+    console.log(query);
+  }
 
   const env = { ...extendedEnv, ...core };
   const result = calc
-    .map((x) => (typeof x === 'string' ? stringToToken(x) : x))
-    .reduce((prev, curr) => lispEval(curr, env), null);
+    .map((x) => (typeof x === 'string' ? str2Token(x) : x))
+    .reduce((prev, curr) => lisp(curr, env), null);
 
-  if (VERBOSE) {
+  if (verbose) {
     console.log();
-    calc.forEach((exp) => console.log(tokenToString(exp)));
+    calc.forEach((exp) => console.log(token2Str(exp)));
     console.log();
+    console.log('  -> ' + result + '\n');
   }
 
-  console.log('  -> ' + result + '\n');
+  return result as Atom;
 };

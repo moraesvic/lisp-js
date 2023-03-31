@@ -2,11 +2,11 @@ type Function = (...args: any[]) => Atom;
 export type Env = { [key: string]: Atom | Function };
 export type AST = Atom | AST[];
 
-type Atom = string | number | boolean | null;
-type RawString = `"${string}"` | `'${string}'`;
+export type Atom = string | number | boolean | null;
+type RawString = `"${string}"`;
 
 const isQuoted = (x: Atom): x is RawString =>
-  typeof x === 'string' && x.match(/(["']).*\1/) !== null;
+  typeof x === 'string' && x.match(/(["]).*\1/) !== null;
 
 const unquote = (raw: RawString) => raw.slice(1, -1);
 
@@ -56,7 +56,7 @@ const resolveAST = (ast: AST, env: Env): Atom | Function => {
   return result;
 };
 
-export const lispEval = (ast: AST, env: Env): Atom => {
+export const lisp = (ast: AST, env: Env): Atom => {
   const resolved = resolveAST(ast, env);
   if (typeof resolved === 'function') {
     throw new Error("Final result can't be a function");

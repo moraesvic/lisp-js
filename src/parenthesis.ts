@@ -1,19 +1,19 @@
 import { AST } from './lisp';
 
-const _tokenToString = (token: AST): string => {
+const _token2Str = (token: AST): string => {
   if (Array.isArray(token)) {
-    return `(${token.map((x) => _tokenToString(x)).join(' ')})`;
+    return `(${token.map((x) => _token2Str(x)).join(' ')})`;
   } else {
     return token?.toString() || 'NIL';
   }
 };
 
-export const tokenToString = (token: AST) =>
-  _tokenToString(token)
+export const token2Str = (token: AST) =>
+  _token2Str(token)
     .replace(/\s{2,}/g, ' ')
     .replace('( )', '()');
 
-const _stringToToken = (splitted: string[]) => {
+const _str2Token = (splitted: string[]) => {
   const out = [] as AST[];
   for (let i = 0; i < splitted.length; i++) {
     if (splitted[i] === '(') {
@@ -32,7 +32,7 @@ const _stringToToken = (splitted: string[]) => {
         }
       }
       inner.pop();
-      out.push(_stringToToken(inner));
+      out.push(_str2Token(inner));
       continue;
     }
     const el = splitted[i];
@@ -42,7 +42,7 @@ const _stringToToken = (splitted: string[]) => {
   return out;
 };
 
-export const stringToToken = (str: string) => {
+export const str2Token = (str: string) => {
   const s =
     str
       .replace(/\((\S)/g, '( $1')
@@ -68,6 +68,5 @@ export const stringToToken = (str: string) => {
 
     acc += ch;
   }
-  // console.log(arr);
-  return _stringToToken(arr)[0];
+  return _str2Token(arr)[0];
 };
