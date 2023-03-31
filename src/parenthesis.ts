@@ -42,12 +42,16 @@ const _str2Token = (splitted: string[]) => {
 };
 
 export const str2Token = (str: string) => {
+  // TODO: this is bad
   const s =
     str
       .replace(/\((\S)/g, '( $1')
       .replace(/(\S)\)/g, '$1 )')
       .replace(/\(\(/g, '( (')
       .replace(/\)\)/g, ') )') + ' ';
+
+  // TODO: this does not allow escaping a double quote,
+  // something like '"abc \" def"' should be possible
 
   const arr = [] as string[];
   let quoting = false;
