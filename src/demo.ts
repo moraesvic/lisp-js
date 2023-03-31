@@ -39,33 +39,33 @@ const inputs: Input[] = [
   {
     query: 'What are our monthly net earnings?',
     calc: [
-      '(define income_monthly (* income-weekly 4))',
-      '(usd (- income_monthly expenses-monthly))',
+      '(define income-monthly (* income-weekly 4))',
+      '(usd (- income-monthly expenses-monthly))',
     ],
   },
   {
     query: 'How much will we pay on taxes this month?',
     calc: [
-      '(define income_monthly (* income-weekly 4))',
-      '(usd (* income_monthly 0.1))',
+      '(define income-monthly (* income-weekly 4))',
+      '(usd (* income-monthly 0.1))',
     ],
   },
   /* Binding multiple values for easier computation */
   {
     query: 'After taxes are paid, how much money will be left?',
     calc: [
-      '(define income_monthly (* income-weekly 4))',
-      '(define taxes (* income_monthly 0.1))',
-      '(define net (- income_monthly expenses-monthly))',
+      '(define income-monthly (* income-weekly 4))',
+      '(define taxes (* income-monthly 0.1))',
+      '(define net (- income-monthly expenses-monthly))',
       '(usd (- net taxes))',
     ],
   },
   {
     query: 'How much is that in euros?',
     calc: [
-      '(define income_monthly (* income-weekly 4))',
-      '(define taxes (* income_monthly 0.1))',
-      '(define net (- income_monthly expenses-monthly))',
+      '(define income-monthly (* income-weekly 4))',
+      '(define taxes (* income-monthly 0.1))',
+      '(define net (- income-monthly expenses-monthly))',
       '(concat "€ " (to-fixed (usd-to-eur (- net taxes)) 2))',
     ],
   },
@@ -73,9 +73,9 @@ const inputs: Input[] = [
     query:
       'Assuming a book costs 27 dollars, how many books will I be able to buy when I have paid taxes?',
     calc: [
-      '(define income_monthly (* income-weekly 4))',
-      '(define taxes (* income_monthly 0.1))',
-      '(define net (- income_monthly expenses-monthly))',
+      '(define income-monthly (* income-weekly 4))',
+      '(define taxes (* income-monthly 0.1))',
+      '(define net (- income-monthly expenses-monthly))',
       '(concat (floor (/ (- net taxes) 27)) " books")',
     ],
   },
