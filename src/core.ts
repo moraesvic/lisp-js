@@ -1,13 +1,21 @@
 export const core = {
   PI: Math.PI,
   E: Math.E,
+  abs: Math.abs,
   sin: Math.sin,
-  cos: Math.cos,
-  tan: Math.tan,
+  sinh: Math.sinh,
   asin: Math.asin,
+  asinh: Math.asinh,
+  cos: Math.cos,
+  cosh: Math.cosh,
   acos: Math.acos,
+  acosh: Math.acosh,
+  tan: Math.tan,
+  tanh: Math.tanh,
   atan: Math.atan,
+  atanh: Math.atanh,
   round: Math.round,
+  trunc: Math.trunc,
   max: Math.max,
   min: Math.min,
   log: Math.log,
@@ -34,4 +42,6 @@ export const core = {
     console.log(message);
     return null;
   },
+  match: (s: string, regex: string, flags = '') =>
+    s.match(new RegExp(regex, flags)) !== null,
 };

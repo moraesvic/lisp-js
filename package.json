@@ -14,6 +14,7 @@
   "scripts": {
     "build-lib": "npx tsc && npx webpack -c webpack.lib.config.js",
     "build-demo": "npx tsc && npx webpack -c webpack.demo.config.js",
-    "clean": "rm -rf dist/ && rm main.js"
+    "clean": "rm -rf dist/ demo.js lib.js",
+    "dev": "npx nodemon src/demo.ts"
   }
 }

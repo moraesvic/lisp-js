@@ -25,13 +25,32 @@ const inputs: Input[] = [
     query: 'What is the square root of 2?',
     calc: ['(sqrt 2)'],
   },
-  /* Function with one argument */
+  {
+    query: 'Give me a random number.',
+    calc: ['(random)'],
+  },
+  {
+    query: 'Give me a random between 0 and 99.',
+    calc: ['(floor (* (random) 100))'],
+  },
   {
     query: 'Please count to 100.',
     calc: ['(range 100)'],
   },
-  /* A bit more contrived, prints a custom message depending on the result of
-   * an inequation */
+  {
+    query: 'Is 2023-03-30 possibly a date in the form YYYY-MM-DD?',
+    calc: [
+      '(define regex-date "^[12]\\d{3}-\\d{2}-\\d{2}$")',
+      '(match "2023-03-30" regex-date)',
+    ],
+  },
+  {
+    query: 'Is 20283-03-30 possibly a date in the form YYYY-MM-DD?',
+    calc: [
+      '(define regex-date "^[12]\\d{3}-\\d{2}-\\d{2}$")',
+      '(match "20283-03-30" regex-date)',
+    ],
+  },
   {
     query: 'Are we earning more than spending?',
     calc: ['(yes-or-no (>= (* income-weekly 4) expenses-monthly))'],
@@ -50,7 +69,6 @@ const inputs: Input[] = [
       '(usd (* income-monthly 0.1))',
     ],
   },
-  /* Binding multiple values for easier computation */
   {
     query: 'After taxes are paid, how much money will be left?',
     calc: [
@@ -109,3 +127,6 @@ const extendedEnv = {
 
 console.table(removeFunctionsFromObject(extendedEnv));
 inputs.forEach((input) => compute(input, extendedEnv, true));
+
+// A quick one
+console.log(`2 to the power of 6 is ${compute(['(pow 2 6)'])}.`);
